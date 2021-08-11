@@ -1,0 +1,25 @@
+@import 'vars/vars';
+
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+}
+
+.title {
+    margin: 0 auto;
+    padding: 15px 20px;
+
+    background-color: $accent-color;
+    color: $white-text;
+    transition: background-color .2s ease-in-out;
+
+    &:hover {
+        background-color: darken($accent-color, 5%);
+    }
+}

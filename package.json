@@ -22,6 +22,7 @@
     "gulp-strip-css-comments": "^2.0.0"
   },
   "dependencies": {
-    "browser-sync": "^2.26.14"
+    "browser-sync": "^2.26.14",
+    "panini": "^1.7.1"
   }
 }

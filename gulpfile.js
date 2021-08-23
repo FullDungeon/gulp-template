@@ -8,6 +8,7 @@ const plumber           = require("gulp-plumber");
 const rename            = require("gulp-rename");
 const imagemin          = require("gulp-imagemin");
 const del               = require("del");
+const panini            = require("panini");
 
 // css
 const sass              = require('gulp-sass');
@@ -63,7 +64,16 @@ function serve() {
 
 // HTML
 function html() {
+    panini.refresh();
     return src(path.src.html, {base: srcPath})
+        .pipe(plumber())
+        .pipe(panini({
+            root:     srcPath,
+            layouts:  srcPath + "layouts/",
+            partials: srcPath + "partials/",
+            helpers:  srcPath + "helpers/",
+            data:     srcPath + "data/",
+        }))
         .pipe(dest(path.build.html))
         .pipe(browserSync.reload({stream: true}));
 }
@@ -190,7 +200,7 @@ function watchFiles() {
     gulp.watch([path.watch.fonts],  fonts);
 }
 
-const build = gulp.series(clean, gulp.parallel(html, css, cssBlocks, js, images, fonts));
+const build = gulp.series(clean, gulp.parallel(html, css/*, cssBlocks*/, js, images, fonts));
 const watch = gulp.parallel(build, watchFiles, serve);
 
 // EXPORT
